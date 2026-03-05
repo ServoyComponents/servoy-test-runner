@@ -110,8 +110,8 @@ function buildDockerRunCommand() {
 
     commandArguments = commandArguments.concat([
         `ghcr.io/servoycomponents/servoy_tester:${servoyVersion}`,
-        `-Dsmart_test_solutions="${solutionName}"`,
-        `-Dtest.timeout="${testTimeout}"`
+        `-Dsmart_test_solutions=${solutionName}`,
+        `-Dtest.timeout=${testTimeout}`
     ]);
 
     const servoyVersionParts = servoyVersion.split("."),
@@ -166,7 +166,7 @@ function buildDockerRunCommand() {
         if (prependWorkspacePrefixFields.includes(stringField)) {
             stringFieldValue=`/servoy_code/${stringFieldValue}`;
         }
-        commandArguments.push(`-D${stringFields[stringField]}="${stringFieldValue}"`);
+        commandArguments.push(`-D${stringFields[stringField]}=${stringFieldValue}`);
     });
     Object.keys(booleanFields).forEach((booleanField) => {
         let booleanFieldValue = core.getBooleanInput(booleanField);
