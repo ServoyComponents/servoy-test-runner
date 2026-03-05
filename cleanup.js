@@ -1,5 +1,5 @@
-const core = require("@actions/core");
-const childProcess = require("child_process");
+import * as core from "@actions/core";
+import * as childProcess from "child_process";
 
 try {
     const servoyVersion = core.getInput("servoy-version");

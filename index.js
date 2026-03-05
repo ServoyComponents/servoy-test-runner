@@ -74,8 +74,7 @@ try {
             process.exit();
         })
 } catch (e) {
-    // core.setFailed(e.message);
-    console.error(e.message);
+    core.setFailed(e.message);
 }
 
 function buildDockerRunCommand() {
@@ -232,6 +231,12 @@ function runDockerCommand(commandArguments, buildTimeout) {
 
             dockerRunOutput += data.toString();
             process.stdout.write(data);
+        });
+        dockerRunProcess.stderr.setEncoding("utf-8");
+        dockerRunProcess.stderr.on("data", (data) => {
+            if ([null, undefined, ""].includes(data)) return;
+
+            process.stderr.write(data);
         });
         dockerRunProcess.on("close", (code) => {
             if (!~[null, undefined].indexOf(dockerRunProcess.error) && ~dockerRunProcess.error.message.indexOf("ETIMEDOUT")) {
