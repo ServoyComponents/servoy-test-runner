@@ -116,6 +116,6 @@ inputs:
   warnings-file:
     description: "Path to the file where build warnings are written to."
 runs:
-  using: 'node20'
+  using: 'node24'
   main: 'index.js'
   post: 'cleanup.js'

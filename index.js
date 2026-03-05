@@ -1,7 +1,6 @@
-// const core = require("@actions/core");
-const childProcess = require("child_process");
-const fs = require("fs");
-const path = require("path");
+import * as core from "@actions/core";
+import * as childProcess from 'child_process';
+import * as fs from 'fs';
 
 try {
     // Check to make sure the requested Servoy version exists in our GitHub Container Registry
