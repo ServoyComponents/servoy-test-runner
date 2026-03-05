@@ -89,7 +89,7 @@ function buildDockerRunCommand() {
     let commandArguments = [
         "run",
         "--rm",
-        "--add-host=host.docker.internal:host-gateway",
+        "--net=host",
         "-v", `${process.env.GITHUB_WORKSPACE}:/servoy_code`,
         "-v", `${process.env.GITHUB_WORKSPACE}/${propertiesFile}:/usr/home/servoy/application_server/servoy.properties`,
         "-v", `${process.env.GITHUB_WORKSPACE}/${testResultsDir}:/tmp/test_results`,
