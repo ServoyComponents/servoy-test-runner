@@ -87,7 +87,9 @@ function buildDockerRunCommand() {
         testTimeout = core.getInput("timeout");
 
     let commandArguments = [
-        "run", "--rm",
+        "run",
+        "--rm",
+        "--add-host=host.docker.internal:host-gateway",
         "-v", `${process.env.GITHUB_WORKSPACE}:/servoy_code`,
         "-v", `${process.env.GITHUB_WORKSPACE}/${propertiesFile}:/usr/home/servoy/application_server/servoy.properties`,
         "-v", `${process.env.GITHUB_WORKSPACE}/${testResultsDir}:/tmp/test_results`,
