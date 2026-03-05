@@ -1,0 +1,121 @@
+name: "Servoy Test Runner"
+author: "Servoy Components"
+description: "A GitHub Action used to run automated unit tests in Servoy."
+branding:
+  icon: "box"
+  color: "orange"
+inputs:
+  servoy-version:
+    description: "The full Servoy version to use for the tests (ex. '2023.03.2.3844')"
+    required: true
+  solution-name:
+    description: "Name of the primary solution to test"
+    required: true
+  properties-file:
+    description: "Path and name of the properties file used to start the tests"
+    required: true
+  test-results-dir:
+    description: "Name of the folder to export test results and reports."
+    required: true
+  ignore-build-errors:
+    description: "Ignores build errors (warning: use of this flag is discouraged; it can cause invalid solutions to be exported)"
+    default: "false"
+  skip-build:
+    description: "No build markers will be generated. This can greatly decrease export time (warning: use of this flag is discouraged; it can cause invalid solutions to be exported)"
+    default: "false"
+  dbi:
+    description: "Export based on DBI files (even if database servers are available)"
+    default: "false"
+  beans:
+    description: "Space separated list of (smart/web client) beans to export (default: all beans are exported)"
+  exclude-beans:
+    description: "Space separated list of beans to be excluded from the export"
+  lafs:
+    description: "Space separated list of look-and-feels (smart client) to export (default: all lafs are exported)"
+  exclude-lafs:
+    description: "Space separated list of look-and-feels to be excluded from the export"
+  drivers:
+    description: "Space separated list of JDBC (database) drivers to export (default: all drivers are exported)"
+  exclude-drivers:
+    description: "Space separated list of drivers to be excluded from the export"
+  plugins:
+    description: "Space separated list of plugins to export (default: all plugins are exported)"
+  exclude-plugins:
+    description: "Space separated list of plugins to be excluded from the export"
+  additional-solutions:
+    description: "Space separated list of solutions that must be exported, but are not in the current solution's modules (for example, solutions for batch processors)"
+  components:
+    description: "Space separated list of components to export (default: all components are exported)"
+    default: "all"
+  exclude-components:
+    description: "Space separated list of components to be excluded from the export"
+  services:
+    description: "Space separated list of services to export (default: all services are exported)"
+    default: "all"
+  exclude-services:
+    description: "Space separated list of services to be excluded from the export"
+  export-metadata:
+    description: "Export metadata tables"
+    default: "false"
+  check-metadata:
+    description: "Check that metadata for metadata tables is the same for each table, both in the according workspace file and in the actual table in the database before exporting"
+    default: "false"
+  sample-data:
+    description: "Export sample data"
+    default: "false"
+  sample-data-row-count:
+    description: "Number of rows of sample data to export per table"
+  i18n:
+    description: "Export i18n data"
+    default: "false"
+  users:
+    description: "Exports users"
+    default: "false"
+  tables:
+    description: "Export all table information about tables from referenced servers"
+    default: "false"
+  allow-sql-keywords:
+    description: "Allows SQL keywords"
+    default: "false"
+  log4j-configuration-file:
+    description: "A path to a Log4J configuration file that should be included instead of the default one"
+  web-xml-file-name:
+    description: "A path to a web.xml that should be included instead of the default one"
+  ng2:
+    description: "Export Titanium NG2 binaries. If 'sourcemaps' is given, sourcemaps will be generated for .ts files - useful for debugging"
+  ng1:
+    description: "Export NG1 client resources"
+    default: "false"
+  verbose:
+    description: "Enable verbose logging from the Servoy builder."
+    default: "false"
+  extras-folder:
+    description: "Path to the extras folder that contains additional plugins, drivers, etc. that should be included in the Servoy install."
+  timeout:
+    description: "Timeout in milliseconds for the Servoy build process (default 30 minutes)"
+    default: "1800000"
+  errors-line-delimiter:
+    description: "Delimiter between entries in the error output."
+    default: "\\n"
+  errors-no-escape-quotes:
+    description: "Don't escape quotes in error output."
+    default: "false"
+  warnings-line-delimiter:
+    description: "Delimiter between entries in the warning output."
+    default: "\\n"
+  warnings-no-escape-quotes:
+    description: "Don't escape quotes in warning output."
+    default: "false"
+  build-max-memory:
+    description: "Maximum amount of memory that can be consumed by the build process."
+    default: "2048m"
+  extras-folder-ignore:
+    description: "Path to a newline-delimited list of glob file paths to exclude while copying files from the extras folder."
+  errors-file:
+    description: "Path to the file where build errors are written to."
+  warnings-file:
+    description: "Path to the file where build warnings are written to."
+runs:
+  using: 'node20'
+  main: 'index.js'
+  post: 'cleanup.js'
