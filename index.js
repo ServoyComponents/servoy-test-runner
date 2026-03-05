@@ -91,7 +91,7 @@ function buildDockerRunCommand() {
         "-v", `${process.env.GITHUB_WORKSPACE}:/servoy_code`,
         "-v", `${process.env.GITHUB_WORKSPACE}/${propertiesFile}:/usr/home/servoy/application_server/servoy.properties`,
         "-v", `${process.env.GITHUB_WORKSPACE}/${testResultsDir}:/tmp/test_results`,
-        "-e", `ANT_OPTS="-Xms${buildMaxMemory} -Xmx${buildMaxMemory}`
+        "-e", `ANT_OPTS="-Xms${buildMaxMemory} -Xmx${buildMaxMemory}"`
     ], extrasFolder = core.getInput("extras-folder");
     if (extrasFolder !== "") {
         let extrasFolderFullPath = `${process.env.GITHUB_WORKSPACE}/${extrasFolder}`;
@@ -224,7 +224,7 @@ function runDockerCommand(commandArguments, buildTimeout) {
         let dockerRunOutput = "";
         console.log(`Docker command arguments:`);
         console.log(JSON.stringify(commandArguments));
-        
+
         const dockerRunProcess = childProcess.spawn("docker", commandArguments, {timeout: buildTimeout});
         dockerRunProcess.stdout.setEncoding("utf-8");
         dockerRunProcess.stdout.on("data", (data) => {
