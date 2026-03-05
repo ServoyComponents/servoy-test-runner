@@ -91,7 +91,7 @@ function buildDockerRunCommand() {
         "-v", `${process.env.GITHUB_WORKSPACE}:/servoy_code`,
         "-v", `${process.env.GITHUB_WORKSPACE}/${propertiesFile}:/usr/home/servoy/application_server/servoy.properties`,
         "-v", `${process.env.GITHUB_WORKSPACE}/${testResultsDir}:/tmp/test_results`,
-        "-e", `ANT_OPTS="-Xms${buildMaxMemory} -Xmx${buildMaxMemory}"`
+        "-e", `JAVA_TOOL_OPTIONS="-Xms${buildMaxMemory} -Xmx${buildMaxMemory}"`
     ], extrasFolder = core.getInput("extras-folder");
     if (extrasFolder !== "") {
         let extrasFolderFullPath = `${process.env.GITHUB_WORKSPACE}/${extrasFolder}`;
