@@ -110,8 +110,8 @@ function buildDockerRunCommand() {
 
     commandArguments = commandArguments.concat([
         `ghcr.io/servoycomponents/servoy_tester:${servoyVersion}`,
-        `-Dsmart_test_solutions=${solutionName}`,
-        `-Dtest.timeout=${testTimeout}`
+        `-Dsmart_test_solutions="${solutionName}"`,
+        `-Dtest.timeout="${testTimeout}"`
     ]);
 
     const servoyVersionParts = servoyVersion.split("."),
@@ -177,8 +177,6 @@ function buildDockerRunCommand() {
         commandArguments.push(`-D${booleanFields[booleanField]}=1`);
     });
 
-    // TODO: Servoy developer extras
-
     return commandArguments;
 }
 
@@ -224,6 +222,9 @@ function runDockerCommand(commandArguments, buildTimeout) {
     return new Promise((res, rej) => {
         // Our command is now ready. Let 'er rip.
         let dockerRunOutput = "";
+        console.log(`Docker command arguments:`);
+        console.log(JSON.stringify(commandArguments));
+        
         const dockerRunProcess = childProcess.spawn("docker", commandArguments, {timeout: buildTimeout});
         dockerRunProcess.stdout.setEncoding("utf-8");
         dockerRunProcess.stdout.on("data", (data) => {
