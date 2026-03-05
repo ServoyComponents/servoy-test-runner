@@ -242,6 +242,7 @@ function runDockerCommand(commandArguments, buildTimeout) {
             if (!~[null, undefined].indexOf(dockerRunProcess.error) && ~dockerRunProcess.error.message.indexOf("ETIMEDOUT")) {
                 rej([null, "Test timeout exceeded."]);
             } else if (code !== 0) {
+                core.setOutput(`Docker result code: ${code}`);
                 rej([dockerRunOutput, "Tests failed. Please check the logs for more details."]);
             } else {
                 res([dockerRunOutput]);
