@@ -158,7 +158,8 @@ function buildDockerRunCommand() {
             "tables": "servoy.export.flags.tables",
             "allow-sql-keywords": "servoy.export.flags.allow_sql_keywords",
             "ng1": "servoy.export.flags.ng1",
-            "verbose": "servoy.export.flags.verbose"
+            "verbose": "servoy.export.flags.verbose",
+            "es6": "servoy.export.flags.es6"
         };
     Object.keys(stringFields).forEach((stringField) => {
         let stringFieldValue = core.getInput(stringField);
