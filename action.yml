@@ -117,6 +117,7 @@ inputs:
     description: "Path to the file where build warnings are written to."
   es6:
     description: "Enables the ECMAScript (ES6) parser."
+    default: "false"
 runs:
   using: 'node24'
   main: 'index.js'
